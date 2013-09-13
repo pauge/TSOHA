@@ -1,0 +1,70 @@
+/* 
+    Document   : main
+    Created on : Sep 12, 2013, 11:46:45 PM
+    Author     : Arto
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body{
+    background-color: #c4e3f3;
+    height: 800px;
+}
+#page{
+    position: relative;
+    width: 800px;
+    height: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-style: solid;
+}
+
+#top {
+    background-color: #faf2cc;
+    height: 70px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-width: 1px;
+    text-align: center;
+    font-family:"Courier New",Lucida Console,monospace;
+    font-size: 20px;
+    padding-bottom: 1px;
+}
+
+#side {
+    position: absolute;
+    top: 70px;
+    width: 150px;
+    height: 729px;
+    background-color: lightsalmon;
+    border-color: #39b3d7
+}
+
+#navbox {
+}
+#navbox ul{
+
+}
+
+#navbox dl dt {
+    margin: 1px;
+    color: salmon;
+    border-style: solid;
+}
+
+#content {
+    position: absolute;
+    top: 70px;
+    left: 150px;
+    right: 1px;
+    width: 648px;
+    height: 729px;
+    background: whitesmoke;
+
+
+}
+h1 {
+    font-size: larger;
+}
