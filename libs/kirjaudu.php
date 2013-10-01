@@ -1,5 +1,6 @@
 <?php
   session_start();
+  include 'models/kayttaja.php';
   if(empty($_POST["ID"])) {
       naytaNakyma(login.php, array('error' => "Antamasi käyttäjätunnus on tyhjä.",));
   }
@@ -8,16 +9,13 @@
   }
   $kayttaja = $_POST["ID"];
   $sala = $_POST["passwd"];
-  
-  if(Kayttaja::getKayttaja($kayttaja, $sala) != null) {
-      $admin = Kayttaja::getKayttaja($kayttaja, $sala);
-      $_SESSION['logged_in'] = $admin;
-      header('Location: views/haku.php');
-      echo 'onnistui';
-      }
-      
+ 
+  if(Kayttaja::getKayttaja($kayttaja, $sala) != NULL) {
+      $admin = new Kayttaja($kayttaja, $sala);
+      $_SESSION['kayttaja'] = $admin;
+      header('Location: ../index.php');
+      } 
   else {
-      echo '4';
       //kirjaVirhe(login.php, array(
       //'error' => "Käyttäjää ei löytynyt." ));
   }
