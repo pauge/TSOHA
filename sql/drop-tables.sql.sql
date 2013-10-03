@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS resepti, kayttaja;
+DROP TABLE IF EXISTS resepti, kayttaja, aines, ainesosa;

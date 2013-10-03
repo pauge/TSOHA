@@ -24,4 +24,17 @@ class Kayttaja {
           header('Location:../kirj.php');
       }
   }
+
+    function getTunnus() {
+        return $this->ktunnus;
+    }
+            
+    public static function getID() {
+        return $this->id;
+    }
+            
+    public static function setPWD($a){
+        $this->salasana = $a;
+    }
+            
 }

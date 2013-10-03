@@ -12,3 +12,13 @@ INSERT INTO resepti VALUES(
 	'true',
         'administrator'
 );
+
+INSERT INTO aines VALUES(
+        'appelsiinimehu'
+);
+
+INSERT INTO ainesosa VALUES(
+	resepti        int             PRIMARY KEY,
+	maara          int,
+	aines          char(20)    REFERENCES aines(aines)
+);
