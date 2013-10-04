@@ -1,18 +1,16 @@
-<?php 
-class dbYhteys {
-    public static $yhteys;
+<?php
     
-    function __construct() {
-        self::$yhteys;
+    function getDBYhteys() {
+    
+        static $yhteys = null;
+        
+        if($yhteys == null) {
+            $yhteys = new PDO("pgsql:dbname=askivilu");
+            $yhteys=setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        return $yhteys;
     }
-    public static function getDBYhteys() {
-    if(self::$yhteys == null) {
-        self::$yhteys = new PDO("pgsql:dbname=askivilu");
-        self::$yhteys=setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        return self::$yhteys;
-    }
+ }
 
-    return self::$yhteys;
-}
 
-}
+
+

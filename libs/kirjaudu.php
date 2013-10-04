@@ -10,12 +10,21 @@
   $kayttaja = $_POST["ID"];
   $sala = $_POST["passwd"];
  
-  if(Kayttaja::getKayttaja($kayttaja, $sala) != NULL) {
+  /*if(Kayttaja::getKayttaja($kayttaja, $sala) != NULL) {
       $admin = new Kayttaja($kayttaja, $sala);
-      $_SESSION['kayttaja'] = $admin;
-      header('Location: ../index.php');
+      $_SESSION['kayttaja'] = $admin;*/
+      
+  $yht = new PDO("pgsql: dbname=askivilu");
+  $lause = "select * from kayttaja WHERE ktunnus = '$kayttaja' and salasana = '$sala'";
+  
+  $kysely = $yht->prepare($lause);
+  $kysely->execute();
+  $num = $kysely->rowCount();
+  if($num==1) {
+      $_SESSION['kirjautunut'] = $kayttaja;
+      header('Location: ../hak.php');
       } 
   else {
-      //kirjaVirhe(login.php, array(
+      header('Location: ../rek.php');
       //'error' => "Käyttäjää ei löytynyt." ));
   }

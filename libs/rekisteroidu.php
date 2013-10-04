@@ -1,7 +1,10 @@
 <?php 
-  include 'models/kayttaja.php';
+  require_once 'common.php';
+  require_once 'models/kayttaja.php';
   include '../sql/dbyhteys.php';
   
+
+
   if(empty($_POST["ID"])) {
       naytaNakyma(login.php, array('error' => "Antamasi käyttäjätunnus on tyhjä.",));
   }
@@ -17,24 +20,21 @@
   $tunnus = $_POST["ID"];
   $pwd = $_POST["passwd"];
   
-  $yht = dbYhteys::getDBYhteys();
-  //$lause = "select * from kayttaja;";
-  $lause = "delete from kayttaja where id=2;";
+  $yht = new PDO("pgsql: dbname=askivilu");
+  $lause = "select * from kayttaja WHERE ktunnus = '$tunnus'";
   
-  //$kysely = $yht->prepare($lause);
-  //$tulos = $kysely->execute();
-  //$rivi = $tulos->fetchObject();
-  
-  
-  var_dump($yht);
-  /*if($tulos > 0) {
+  $kysely = $yht->prepare($lause);
+  $kysely->execute();
+  $num = $kysely->rowCount();
+
+  if($num > 0) {
       echo "Tunnus on jo olemassa";
   }
-  
   else {
-      $lause = "INSERT into kayttaja VALUES (?,?";
-      $kysely = $yhteys->prepare($lause);
-      $tulos = $yhteys->exec(array($tunnus,$pwd));
-  }*/
-     
- 
+      $lause = "INSERT into kayttaja VALUES (?,?,false);";
+      $kysely = $yht->prepare($lause);
+      $kysely->execute(array("$tunnus","$pwd"));
+      //header("Location: ../index.php");
+      var_dump($kysely);//echo $num;
+  }
+  ?>

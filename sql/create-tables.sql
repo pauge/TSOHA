@@ -1,6 +1,5 @@
 CREATE TABLE kayttaja (
-        id          SERIAL    PRIMARY KEY,
-	ktunnus     char(15),
+	ktunnus     char(15) PRIMARY KEY,
 	salasana    char(16),
 	pro         boolean
 );
@@ -11,7 +10,7 @@ CREATE TABLE resepti (
 	ohje                char(200),
 	lisahuomio          char(100),
 	hyvaksytty          boolean,
-       	lisaaja             int     REFERENCES kayttaja(id)	
+       	lisaaja             string     REFERENCES kayttaja(ktunnus)	
 );
 
 CREATE TABLE aines (

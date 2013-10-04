@@ -25,7 +25,6 @@
                         <dt><a href="http://askivilu.users.cs.helsinki.fi/rek.php">Rekisteröityminen</a></dt>
                         <dt><a href="http://askivilu.users.cs.helsinki.fi/logout.php">Kirjaudu ulos</a></dt>
                     </dl>
-
                 </div>
             </div>
         <div id="content"> 

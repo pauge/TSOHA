@@ -3,11 +3,12 @@
 
 class Kayttaja {
 
-  private $id;
-  private $ktunnus;
-  private $salasana;
+  protected static $id = 1;
+  public $ktunnus;
+  public $salasana;
   
   function __construct($tunnus, $pwd) {
+    self::$id++;
     $this->ktunnus = $tunnus;
     $this->salasana = $pwd;
   }
@@ -27,14 +28,22 @@ class Kayttaja {
 
     function getTunnus() {
         return $this->ktunnus;
+        die();
     }
             
-    public static function getID() {
-        return $this->id;
+    function getID() {
+        return self::$id;
+        die();
+    }
+    function upID() {
+        self::$id++;
+        die();
     }
             
     public static function setPWD($a){
         $this->salasana = $a;
+        die();
     }
+    
             
 }

@@ -1,6 +1,9 @@
 <?php
+
+    $yhteys;
     session_start();
-  
+
+    
     function naytaNakyma($sivu, $array) {
         require 'views/pohja.php';
         die();
@@ -13,15 +16,23 @@
     };
 
     function onkoKirjautunut() {
-        if($_SESSION['kayttaja'] != NULL) {
-            return TRUE;
+        if(isset($_SESSION['kayttaja'])) {
+            echo $_SESSION['kayttaja'];
             die();
         }
         else
             return FALSE;
         header('Location:kirj.php');
-        die();
+        die();//
     };
     function ulosKirjaus() {
         unset($_SESSION['kayttaja']);
     };
+    
+    function getYhteys() {
+        if($yhteys == null) {
+        $yhteys = new PDO("pgsql:dbname=askivilu");
+        $yhteys=setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        return $yhteys;
+    };
+ }
