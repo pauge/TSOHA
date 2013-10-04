@@ -2,6 +2,7 @@
             <h1>Reseptiehdotus<br></br><br></br></h1>
             <form>
                 <div>
+                    <?php?>
                     <select>
                         <option value="2 cl">2 cl</option>
                         <option value="4 cl">4 cl</option>

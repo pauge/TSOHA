@@ -26,5 +26,4 @@
       } 
   else {
       header('Location: ../rek.php');
-      //'error' => "Käyttäjää ei löytynyt." ));
   }

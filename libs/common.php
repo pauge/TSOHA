@@ -1,11 +1,10 @@
 <?php
-
-    $yhteys;
     session_start();
 
     
-    function naytaNakyma($sivu, $array) {
+    function naytaNakyma($sivu, $a) {
         require 'views/pohja.php';
+        
         die();
     };
   
@@ -16,17 +15,14 @@
     };
 
     function onkoKirjautunut() {
-        if(isset($_SESSION['kayttaja'])) {
-            echo $_SESSION['kayttaja'];
-            die();
+        if($_SESSION['kirjautunut']!= null) {
+            return true;
         }
         else
-            return FALSE;
-        header('Location:kirj.php');
-        die();//
+            return false;
     };
     function ulosKirjaus() {
-        unset($_SESSION['kayttaja']);
+        $_SESSION['kirjautunut'] = null;
     };
     
     function getYhteys() {

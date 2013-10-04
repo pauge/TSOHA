@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,8 +12,7 @@
             
         <div> 
             <div id="top">Drinkkiarkisto</div>
-            <div id="top_msg">
-            </div>
+            <div id="top_msg"></div>
         </div>
         
             <div id="side">
@@ -37,3 +34,4 @@
         </div>
     </body>
 </html>
+

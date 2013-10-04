@@ -18,19 +18,21 @@ body{
     margin-right: auto;
     border-left-width: 1px;
     border-right-width: 1px;
-    border-style: solid;
 }
 
 #top {
     background-color: #faf2cc;
-    height: 70px;
-    border-bottom-style: solid;
-    border-bottom-color: black;
-    border-width: 1px;
+    height: 35px;
     text-align: center;
     font-family:"Courier New",Lucida Console,monospace;
     font-size: 20px;
     padding-bottom: 1px;
+}
+#top_msg {
+    background-color: #faf2cc;
+    height: 35px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
 }
 
 #side {
