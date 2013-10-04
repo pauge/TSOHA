@@ -1,5 +1,5 @@
 CREATE TABLE kayttaja (
-        id          int    PRIMARY KEY,
+        id          SERIAL    PRIMARY KEY,
 	ktunnus     char(15),
 	salasana    char(16),
 	pro         boolean
