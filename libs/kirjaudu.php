@@ -1,11 +1,17 @@
 <?php
   session_start();
+  require_once 'common.php';
   include 'models/kayttaja.php';
   if(empty($_POST["ID"])) {
-      naytaNakyma(login.php, array('error' => "Antamasi käyttäjätunnus on tyhjä.",));
+      $sivu = 'kirj.php';
+      $err = "Antamasi käyttäjätunnus on tyhjä.";
+      naytaNakymaVirhe($sivu, $err);
   }
+  
   if(empty($_POST["passwd"])) {
-      naytaNakyma(login.php, array('error' => "Antamasi salasana on tyhjä.",));
+      $sivu = '../views/kirjautuminen.php';
+      $err = "Antamasi salasana on tyhjä.";
+      naytaNakymaVirhe($sivu, $err);
   }
   $kayttaja = $_POST["ID"];
   $sala = $_POST["passwd"];

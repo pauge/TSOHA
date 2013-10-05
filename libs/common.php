@@ -2,7 +2,14 @@
     session_start();
 
     
-    function naytaNakyma($sivu, $a) {
+    function naytaNakymaVirhe($sivu, $a) {
+        $viesti['virhe'] = $a;
+        //$sivu = $s;
+        require '../views/pohja.php';
+    };
+    
+    function naytaNakyma($sivu) {
+
         require 'views/pohja.php';
         
         die();

@@ -29,6 +29,7 @@ body{
     padding-bottom: 1px;
 }
 #top_msg {
+    text-align: center;
     background-color: #faf2cc;
     height: 35px;
     border-bottom-style: solid;
