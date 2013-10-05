@@ -34,7 +34,8 @@
       $lause = "INSERT into kayttaja VALUES (?,?,false);";
       $kysely = $yht->prepare($lause);
       $kysely->execute(array("$tunnus","$pwd"));
-      //header("Location: ../index.php");
-      var_dump($kysely);//echo $num;
+      $_SESSION['kirjautunut'] = $tunnus;
+      header("Location: ../index.php");
+      //var_dump($kysely);//echo $num;
   }
   ?>
