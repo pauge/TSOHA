@@ -2,8 +2,16 @@
   session_start();
   require_once 'common.php';
   include 'models/kayttaja.php';
+ 
+  /*Onko kentät täytetty?*/
   if(empty($_POST["ID"])) {
-      $sivu = 'kirj.php';
+      if(empty($_POST["passwd"])) { 
+        $sivu = '../views/kirjautuminen.php';
+        $err = "Täydennä kentät.";
+        naytaNakymaVirhe($sivu, $err);
+        die();
+      }
+      $sivu = '../views/kirjautuminen.php';
       $err = "Antamasi käyttäjätunnus on tyhjä.";
       naytaNakymaVirhe($sivu, $err);
   }
@@ -13,6 +21,8 @@
       $err = "Antamasi salasana on tyhjä.";
       naytaNakymaVirhe($sivu, $err);
   }
+  
+ 
   $kayttaja = $_POST["ID"];
   $sala = $_POST["passwd"];
  
@@ -30,6 +40,8 @@
       $_SESSION['kirjautunut'] = $kayttaja;
       header('Location: ../hak.php');
       } 
-  else {
-      header('Location: ../rek.php');
+  if($num==0 && !empty($_POST["ID"]) && !empty($_POST["passwd"])) {
+      $sivu = '../views/kirjautuminen.php';
+      $err = "Käyttäjää ei löytynyt. Yritä uudelleen tai rekisteröidy.";
+      naytaNakymaVirhe($sivu, $err);
   }

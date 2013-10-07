@@ -24,12 +24,14 @@ body{
     background-color: #faf2cc;
     height: 35px;
     text-align: center;
+     
     font-family:"Courier New",Lucida Console,monospace;
     font-size: 20px;
     padding-bottom: 1px;
 }
 #top_msg {
     text-align: center;
+    font-weight: bold;
     background-color: #faf2cc;
     height: 35px;
     border-bottom-style: solid;

@@ -4,8 +4,13 @@
     
     function naytaNakymaVirhe($sivu, $a) {
         $viesti['virhe'] = $a;
-        //$sivu = $s;
         require '../views/pohja.php';
+    };
+    
+    /*Eri funktio tiedostopolkujen takia*/
+    function naytaNakymaVirhe2($sivu, $a) {
+        $viesti['virhe'] = $a;
+        require 'views/pohja.php';
     };
     
     function naytaNakyma($sivu) {

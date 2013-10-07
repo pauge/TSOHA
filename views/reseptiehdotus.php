@@ -1,18 +1,21 @@
 <div> 
             <h1>Reseptiehdotus<br></br><br></br></h1>
-            <form>
+            <p>Jos et löydä tarvittavaa aineosaa listalta, lisää se tässä:</p>
+            <form action="../libs/lisaaAine.php" method="post">
+                <p><input type="text" name="uusi"><input type="submit"></p>
+            </form>
+            <br><br>
+            <form action="../libs/lisaaresepti.php" method="post">
                 <div>
-                    <?php?>
-                    <select>
-                        <option value="2 cl">2 cl</option>
-                        <option value="4 cl">4 cl</option>
-                    </select>
-                    <p> <input type="text" name="Aines"></p>
+                    <p>Reseptin nimi:</p>
+                    <p><input type="text" name="nimi" maxlength="20" size="20"></p><br>
+                    <p>Määrä ja aines</p>
+                    <p><input type="text" name="maara" maxlength="4" size="4">  <input type="text" name="aines"></p><br>
                 </div>
                 <p>Ohjeet</p>
-                    <textarea rows="5" cols="50"></textarea>
+                    <textarea rows="3" cols="50" name="ohje"></textarea>
                 <p>Lisähuomautukset</p>
-                    <textarea rows="5" cols="50"></textarea>
+                    <textarea rows="3" cols="50"></textarea>
                 <p><input type="submit"></p>
             </form>
         </div>
