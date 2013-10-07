@@ -16,7 +16,9 @@
             <div id="top">Drinkkiarkisto</div>
             <div id="top_msg">
                 <?php if(isset($viesti['virhe'])){
+                    echo "<p>";
                     echo $viesti['virhe'];
+                    echo "</p>";
                     }    
                 ?>
             </div>
@@ -33,7 +35,7 @@
                         <dt><a href="http://askivilu.users.cs.helsinki.fi/rek.php">Rekisteröityminen</a></dt>
                         <dt><a href="http://askivilu.users.cs.helsinki.fi/logout.php">Kirjaudu ulos</a></dt>
                         <?php if($_SESSION['kirjautunut']!=null) {
-                                echo "Hei ";
+                                echo " Hei ";
                                 echo $_SESSION['kirjautunut'];
                                 }
                         ?>

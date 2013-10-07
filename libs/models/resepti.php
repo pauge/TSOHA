@@ -3,7 +3,7 @@
 
 class Kayttaja {
 
-  private $id;
+  static $id = 1;
   private $nimi;
   private $ohje;
   private $lisahuomio;
@@ -21,7 +21,7 @@ class Kayttaja {
   }
 
   public static function getID() {
-    return $this->id;
+    return self::$id;
   }
           
   public static function getNimi() {
@@ -42,5 +42,8 @@ class Kayttaja {
           
   public static function getHyvaksytty() {
       return $this->hyvaksytty;
+  }
+  function upID() {
+      self::$id++;
   }
 }

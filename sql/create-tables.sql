@@ -5,12 +5,12 @@ CREATE TABLE kayttaja (
 );
 
 CREATE TABLE resepti (
-	id                  int        PRIMARY KEY,
+	id                  SERIAL        PRIMARY KEY,
 	nimi                char(20),
-	ohje                char(200),
+	ohje                char(100),
 	lisahuomio          char(100),
 	hyvaksytty          boolean,
-       	lisaaja             string     REFERENCES kayttaja(ktunnus)	
+       	lisaaja             char(20)     REFERENCES kayttaja(ktunnus)	
 );
 
 CREATE TABLE aines (

@@ -14,15 +14,7 @@
     };
     
     function naytaNakyma($sivu) {
-
         require 'views/pohja.php';
-        
-        die();
-    };
-  
-    function kirjaVirhe($sivu, $data = array()) {
-        $data = (object)$data;
-        require 'views/kirjautuminen.php';
         die();
     };
 
@@ -33,6 +25,7 @@
         else
             return false;
     };
+    
     function ulosKirjaus() {
         $_SESSION['kirjautunut'] = null;
     };
@@ -46,13 +39,35 @@
  }
     function tulostaAineet() {
         $yhteys = new PDO("pgsql:dbname=askivilu");
-        
+
         $lause = "select * from aines;";
         $kysely = $yhteys->prepare($lause);
-        $lista = $kysely->execute();
-        
-        while ($tulos = $lista->fetchObject()) {
-            
+        $kysely->execute();
+
+        $i = 1;
+        while ($tulos = $kysely->fetch(PDO::FETCH_OBJ)) {
+            $nimi = "$tulos->aines";
+            echo "<input type='text' height='7' maxlength='4' size='1' name='$nimi'>cl  $tulos->aines&nbsp;&nbsp;&nbsp;";
+            if($i%3==0) {
+                echo "<br>";
+            }
+            $i++;
         }
-        
     }
+    
+    function listaaKaikki() {
+        $yhteys = new PDO("pgsql:dbname=askivilu");
+
+        $lause = "select * from resepti;";
+        $kysely = $yhteys->prepare($lause);
+        $kysely->execute();
+
+        while ($tulos = $kysely->fetch(PDO::FETCH_OBJ)) {
+            echo "$tulos->nimi";
+            echo "<br>";
+            echo "$tulos->ohje";
+            echo "$<br>";
+            echo "$tulos->lisahuomio";
+        }
+    }
+    

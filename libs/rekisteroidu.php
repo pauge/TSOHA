@@ -6,16 +6,34 @@
 
 
   if(empty($_POST["ID"])) {
-      naytaNakyma(login.php, array('error' => "Antamasi käyttäjätunnus on tyhjä.",));
+      if(empty($_POST["passwd"])||empty($_POST['passwd2'])) { 
+        $sivu = '../views/kirjautuminen.php';
+        $err = "Täytä kaikki kentät.";
+        naytaNakymaVirhe($sivu, $err);
+        die();
+      }
+        $sivu = '../views/rekisteroituminen.php';
+        $err = "Valitse käyttäjätunnus.";
+        naytaNakymaVirhe($sivu, $err);
+  	die();
   }
   if(empty($_POST["passwd"])) {
-      naytaNakyma(login.php, array('error' => "Antamasi salasana on tyhjä.",));
+      $sivu = '../views/rekisteroituminen.php';
+        $err = "Täytä kaikki kentät.";
+        naytaNakymaVirhe($sivu, $err);
+  	die();
   }
   if(empty($_POST["passwd2"])) {
-      naytaNakyma(login.php, array('error' => "Antamasi salasana on tyhjä.",));
+      $sivu = '../views/rekisteroituminen.php';
+        $err = "Täytä kaikki kentät.";
+        naytaNakymaVirhe($sivu, $err);
+  	die();
   }
   if($_POST["passwd"] != $_POST["passwd2"]) {
-      naytaNakyma(login.php, array('error' => "Salasanat eivät täsmänneet.",));
+      $sivu = '../views/rekisteroituminen.php';
+        $err = "Salasanat eivät täsmää.";
+        naytaNakymaVirhe($sivu, $err);
+  	die();
   }
   $tunnus = $_POST["ID"];
   $pwd = $_POST["passwd"];
@@ -28,7 +46,9 @@
   $num = $kysely->rowCount();
 
   if($num > 0) {
-      echo "Tunnus on jo olemassa";
+      $sivu = '../views/rekisteroituminen.php';
+        $err = "Käyttäjätunnus on jo olemassa.";
+        naytaNakymaVirhe($sivu, $err);
   }
   else {
       $lause = "INSERT into kayttaja VALUES (?,?,false);";
@@ -36,6 +56,5 @@
       $kysely->execute(array("$tunnus","$pwd"));
       $_SESSION['kirjautunut'] = $tunnus;
       header("Location: ../index.php");
-      //var_dump($kysely);//echo $num;
   }
   ?>

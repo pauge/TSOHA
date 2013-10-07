@@ -21,6 +21,8 @@
         header("Location: ../res.php");
     }
     else {
-        echo "Täällä '$num'";
+        $sivu = '../views/reseptiehdotus.php';
+        $err = "'$aine' on jo lisättynä. Tarkkana.";
+        naytaNakymaVirhe($sivu, $err);
     }
     ?>

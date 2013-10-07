@@ -25,10 +25,6 @@
  
   $kayttaja = $_POST["ID"];
   $sala = $_POST["passwd"];
- 
-  /*if(Kayttaja::getKayttaja($kayttaja, $sala) != NULL) {
-      $admin = new Kayttaja($kayttaja, $sala);
-      $_SESSION['kayttaja'] = $admin;*/
       
   $yht = new PDO("pgsql: dbname=askivilu");
   $lause = "select * from kayttaja WHERE ktunnus = '$kayttaja' and salasana = '$sala'";

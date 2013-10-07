@@ -8,12 +8,12 @@
 
 body{
     background-color: #c4e3f3;
-    height: 800px;
+    height: 900px;
 }
 #page{
     position: relative;
     width: 800px;
-    height: 800px;
+    height: 900px;
     margin-left: auto;
     margin-right: auto;
     border-left-width: 1px;
@@ -24,7 +24,6 @@ body{
     background-color: #faf2cc;
     height: 35px;
     text-align: center;
-     
     font-family:"Courier New",Lucida Console,monospace;
     font-size: 20px;
     padding-bottom: 1px;
@@ -42,7 +41,7 @@ body{
     position: absolute;
     top: 70px;
     width: 150px;
-    height: 729px;
+    height: 829px;
     background-color: lightsalmon;
     border-color: #39b3d7
 }
@@ -54,9 +53,9 @@ body{
 }
 
 #navbox dl dt {
-    margin: 1px;
-    color: salmon;
-    border-style: solid;
+    margin: 2px;
+    border-color: salmon;
+    border-style: ridge;
 }
 
 #content {
@@ -65,7 +64,8 @@ body{
     left: 150px;
     right: 1px;
     width: 648px;
-    height: 729px;
+    height: 829px;
+    padding-left: 2px;
     background: whitesmoke;
 
 
