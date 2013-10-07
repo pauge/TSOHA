@@ -10,7 +10,7 @@
                     <p>Reseptin nimi:</p>
                     <p><input type="text" name="nimi" maxlength="20" size="20"></p><br>
                     <p>Määrä ja aines</p>
-                    <p><input type="text" name="maara" maxlength="4" size="4">  <input type="text" name="aines"></p><br>
+                    <p><?php tulostaAineet()?></p><br>
                 </div>
                 <p>Ohjeet</p>
                     <textarea rows="3" cols="50" name="ohje"></textarea>

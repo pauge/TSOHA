@@ -44,3 +44,15 @@
         return $yhteys;
     };
  }
+    function tulostaAineet() {
+        $yhteys = new PDO("pgsql:dbname=askivilu");
+        
+        $lause = "select * from aines;";
+        $kysely = $yhteys->prepare($lause);
+        $lista = $kysely->execute();
+        
+        while ($tulos = $lista->fetchObject()) {
+            
+        }
+        
+    }
