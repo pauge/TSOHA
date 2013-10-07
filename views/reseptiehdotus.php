@@ -15,7 +15,7 @@
                 <p>Ohjeet</p>
                     <textarea rows="3" cols="50" name="ohje"></textarea>
                 <p>Lisähuomautukset</p>
-                    <textarea rows="3" cols="50" name="lisa"></textarea>
+                    <textarea rows="3" cols="50" name="lisaohje"></textarea>
                 <p><input type="submit"></p>
             </form>
         </div>

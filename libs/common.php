@@ -64,10 +64,10 @@
 
         while ($tulos = $kysely->fetch(PDO::FETCH_OBJ)) {
             echo "$tulos->nimi";
-            echo "<br>";
+            //echo "<br>";
             echo "$tulos->ohje";
-            echo "$<br>";
+            //echo "<br>";
             echo "$tulos->lisahuomio";
+            echo "<br>";
         }
     }
-    
