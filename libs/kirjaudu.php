@@ -38,6 +38,6 @@
       } 
   if($num==0 && !empty($_POST["ID"]) && !empty($_POST["passwd"])) {
       $sivu = '../views/kirjautuminen.php';
-      $err = "Käyttäjää ei löytynyt. Yritä uudelleen tai rekisteröidy.";
+      $err = "Virhe kirjautuessa. Yritä uudelleen tai rekisteröidy.";
       naytaNakymaVirhe($sivu, $err);
   }

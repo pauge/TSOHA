@@ -1,6 +1,14 @@
 <?php
   require_once 'libs/common.php';
 
-  ulosKirjaus();
-  $sivu = 'views/etu.php';
-  naytaNakyma($sivu);
+  if(onkoKirjautunut()==true) {
+    ulosKirjaus();
+    $sivu = 'views/etu.php';
+    $err = "Kirjauduit ulos.";
+    naytaNakymaVirhe2($sivu, $err);
+  }
+  else {
+      $sivu = 'views/etu.php';
+      $err = "Et ole kirjautunut.";
+      naytaNakymaVirhe2($sivu, $err);
+  }
