@@ -1,8 +1,8 @@
 <div> 
             <h1>Haku<br></br><br></br></h1>
-            <form>
+            <form action="../libs/hae.php" method="post">
                 <p>Anna hakusana:</p>
-                <p><input type="text" name="keyword"><input type="submit"></p>
+                <p><input type="text" name="hakusana"><input type="submit"></p>
             </form>
                 
         </div>
