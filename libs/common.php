@@ -86,7 +86,7 @@
         while ($tulos = $kysely->fetch(PDO::FETCH_OBJ)) {
             $nimi = $tulos->nimi;
             $ohje = $tulos->ohje;
-            $lisa = $tulos->lisaohje;
+            $lisa = $tulos->lisahuomio;
             echo "<p><b>Nimi: </b>$nimi";
             echo "<br>";
             echo "<p><b>Ohje: </b>$ohje";
