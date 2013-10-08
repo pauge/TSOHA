@@ -18,7 +18,7 @@ CREATE TABLE aines (
 );
 
 CREATE TABLE ainesosa (
-	resepti        int             PRIMARY KEY,
+	resepti        int         REFERENCES resepti(id),
 	maara          int,
 	aines          char(20)    REFERENCES aines(aines)
 );
