@@ -38,10 +38,9 @@
   $tunnus = $_POST["ID"];
   $pwd = $_POST["passwd"];
   
-  $yht = new PDO("pgsql: dbname=askivilu");
   $lause = "select * from kayttaja WHERE ktunnus = '$tunnus'";
   
-  $kysely = $yht->prepare($lause);
+  $kysely = getYhteys()->prepare($lause);
   $kysely->execute();
   $num = $kysely->rowCount();
 
@@ -52,7 +51,7 @@
   }
   else {
       $lause = "INSERT into kayttaja VALUES (?,?,false);";
-      $kysely = $yht->prepare($lause);
+      $kysely = getYhteys()->prepare($lause);
       $kysely->execute(array("$tunnus","$pwd"));
       $_SESSION['kirjautunut'] = $tunnus;
       header("Location: ../index.php");

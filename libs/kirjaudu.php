@@ -26,10 +26,9 @@
   $kayttaja = $_POST["ID"];
   $sala = $_POST["passwd"];
       
-  $yht = new PDO("pgsql: dbname=askivilu");
   $lause = "select * from kayttaja WHERE ktunnus = '$kayttaja' and salasana = '$sala'";
   
-  $kysely = $yht->prepare($lause);
+  $kysely = getYhteys()->prepare($lause);
   $kysely->execute();
   $num = $kysely->rowCount();
   if($num==1) {

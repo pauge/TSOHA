@@ -1,10 +1,14 @@
 <div> 
             <h1>Haku<br></br><br></br></h1>
-            <form action="../libs/hae.php" method="post">
-                <p>Anna hakusana:</p>
-                <p><input type="text" name="hakusana"><input type="submit"></p>
-            </form>
-                
+                <p>Valitse hakuehto ja anna hakusana:</p>
+                    <form action="../libs/hae.php" method="post">
+                    <select name="haku">
+                        <option value="aines">Aines</option>
+                        <option value="nimi">Resepti</option>
+                    </select>
+                   <input type="text" name="hakusana" maxlength="20" size="20">
+                   <input type="submit">
+                   </form>
         </div>
 
 

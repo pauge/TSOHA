@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    static $yhteys = NULL;
     
     function naytaNakymaVirhe($sivu, $a) {
         $viesti['virhe'] = $a;
@@ -17,6 +17,14 @@
         require 'views/pohja.php';
         die();
     };
+    
+    function naytaNakymaHaku($sivu, $arr,$num, $haku) {
+        require '../views/pohja.php';
+    };
+    
+    function naytaNakymaHaku2($sivu, $id) {
+        require '../views/pohja.php';
+    };
 
     function onkoKirjautunut() {
         if($_SESSION['kirjautunut']!= null) {
@@ -29,19 +37,18 @@
     function ulosKirjaus() {
         $_SESSION['kirjautunut'] = null;
     };
-    
+     
     function getYhteys() {
-        if($yhteys == null) {
+        if($yhteys == NULL) {
         $yhteys = new PDO("pgsql:dbname=askivilu");
-        $yhteys=setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        }
         return $yhteys;
-    };
- }
+    }
+ 
     function tulostaAineet() {
-        $yhteys = new PDO("pgsql:dbname=askivilu");
 
         $lause = "select * from aines;";
-        $kysely = $yhteys->prepare($lause);
+        $kysely = getYhteys()->prepare($lause);
         $kysely->execute();
 
         $i = 1;
@@ -58,10 +65,8 @@
     }
     
     function listaaKaikki() {
-        $yhteys = new PDO("pgsql:dbname=askivilu");
-
         $lause = "select * from resepti;";
-        $kysely = $yhteys->prepare($lause);
+        $kysely = getYhteys()->prepare($lause);
         $kysely->execute();
         
         while ($tulos = $kysely->fetch(PDO::FETCH_OBJ)) {
@@ -76,11 +81,31 @@
         }
     }
     
-    function listaaResepti($id) {
-        $yhteys = new PDO("pgsql:dbname=askivilu");
+    function listaaKaikkiID($array,$num) {
+        
+        $i = 0;
+        while($i<$num){
+            $lause = "select * from resepti where id = ?";
+            $kysely = getYhteys()->prepare($lause);
+            $kysely->execute(array($array[$i]));
 
+            while ($tulos = $kysely->fetch(PDO::FETCH_OBJ)) {
+                $id = $tulos->id;
+                echo "<a href=";
+                echo '"http://askivilu.users.cs.helsinki.fi/list.php?id=';
+                echo "$id";
+                echo  '">';
+                echo "$tulos->nimi";
+                echo "</a>";
+                echo "<br>";
+            }
+            $i++;
+        }
+    }
+    
+    function listaaResepti($id) {
         $lause = "select * from resepti where id = ?;";
-        $kysely = $yhteys->prepare($lause);
+        $kysely = getYhteys()->prepare($lause);
         $kysely->execute(array($id));
         
         while ($tulos = $kysely->fetch(PDO::FETCH_OBJ)) {
@@ -95,7 +120,7 @@
             echo "</p><br>";
         }
         $lause2 = "select * from ainesosa where resepti = '$id';";
-        $kysely2 = $yhteys->prepare($lause2);
+        $kysely2 = getYhteys()->prepare($lause2);
         $kysely2->execute();
         echo "<p><b>Tarvittavat aineet: </b></p>";
         while($tulos2 = $kysely2->fetch(PDO::FETCH_OBJ)){
@@ -105,7 +130,7 @@
             echo "$maara";
             echo "cl -- $aines"; 
     }
-        echo '<br><br><a href="http://askivilu.users.cs.helsinki.fi/ark.php"> Takaisin </a>';
+        
     }
     function naytaResepti($sivu,$id) {
         require 'views/pohja.php';
