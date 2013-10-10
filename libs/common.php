@@ -1,6 +1,5 @@
 <?php
     session_start();
-    static $yhteys = NULL;
     
     function naytaNakymaVirhe($sivu, $a) {
         $viesti['virhe'] = $a;
@@ -39,6 +38,7 @@
     };
      
     function getYhteys() {
+        static $yhteys = NULL;
         if($yhteys == NULL) {
         $yhteys = new PDO("pgsql:dbname=askivilu");
         }
@@ -112,6 +112,7 @@
             $nimi = $tulos->nimi;
             $ohje = $tulos->ohje;
             $lisa = $tulos->lisahuomio;
+            $lisaaja = $tulos->lisaaja;
             echo "<p><b>Nimi: </b>$nimi";
             echo "<br>";
             echo "<p><b>Ohje: </b>$ohje";
@@ -130,9 +131,37 @@
             echo "$maara";
             echo "cl -- $aines"; 
     }
+    
+
+        if(trim($lisaaja) == trim($_SESSION['kirjautunut'])) {
+            echo '<br><br>';
+            echo "<p><a href=";
+            echo '"http://askivilu.users.cs.helsinki.fi/muok.php?id=';
+            echo "$id";
+            echo  '">';
+            echo "Muokkaa";
+            echo "</a></p>";
+            echo "<p><a href=";
+            echo '"http://askivilu.users.cs.helsinki.fi/poista.php?id=';
+            echo "$id";
+            echo  '">';
+            echo "Poista";
+            echo "</a></p>";
+            echo "<br>";
+        }
         
     }
     function naytaResepti($sivu,$id) {
         require 'views/pohja.php';
         die();
+    }
+    
+    function poistaResepti($id) {
+        $lause = "delete from ainesosa where resepti = ?;";
+        $kysely = getYhteys()->prepare($lause);
+        $kysely->execute(array($id));
+        
+        $lause2 = "delete from resepti where id = ?;";
+        $kysely = getYhteys()->prepare($lause2);
+        $kysely->execute(array($id));
     }
