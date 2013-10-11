@@ -22,6 +22,13 @@
       naytaNakymaVirhe($sivu, $err);
   }
   
+  if(isset($_SESSION['kirjautunut'])) {
+      $sivu = '../views/kirjautuminen.php';
+      $err = "Kirjaa edellinen ulos ensin.";
+      naytaNakymaVirhe($sivu, $err);
+      die();
+  }
+  
  
   $kayttaja = $_POST["ID"];
   $sala = $_POST["passwd"];

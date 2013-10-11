@@ -46,21 +46,47 @@
     }
  
     function tulostaAineet() {
-
+        
         $lause = "select * from aines;";
         $kysely = getYhteys()->prepare($lause);
         $kysely->execute();
 
         $i = 1;
-        $x = 1;
         while ($tulos = $kysely->fetch(PDO::FETCH_OBJ)) {
             $nimi = "$tulos->aines";
-            echo "<input type='text' height='7' maxlength='4' size='1' name='$x'>cl  $tulos->aines&nbsp;&nbsp;&nbsp;";
+            echo "<input type='text' height='7' maxlength='4' size='1' name='"; echo trim($nimi); echo "'>cl  $tulos->aines&nbsp;&nbsp;&nbsp;";
+            if($i%3==0) {           //jakaa aineita vierekkäin/allekkain
+                echo "<br>";
+            }
+            $i++;
+        }
+    }
+    
+    function tulostaAineetMuokattavaksi($id) {
+        
+        $lause = "select * from aines;";
+        $kysely = getYhteys()->prepare($lause);
+        $kysely->execute();
+        
+        $lause2 = "select * from ainesosa where resepti = ?;";  //haetaan ainesosat jotka kuuluvat tälle reseptille
+        $kysely2 = getYhteys()->prepare($lause2);
+        $kysely2->execute(array($id));
+        $tulos2 = $kysely2->fetch(PDO::FETCH_OBJ);
+
+        $i = 1;
+        while ($tulos = $kysely->fetch(PDO::FETCH_OBJ)) {
+            $nimiAinesosa = trim($tulos2->aines);         //aineen nimi vanhassa reseptissä
+            $nimiKentta = trim($tulos->aines);            //kentän nimi, jota tällä hetkellä ollaan täyttämässä
+            $maara = NULL;
+            if($nimiAinesosa == $nimiKentta) {
+                $maara = $tulos2->maara;
+                $tulos2 = $kysely2->fetch(PDO::FETCH_OBJ);
+            }
+            echo "<input type='text' height='7' maxlength='4' size='1' value ='$maara'name='"; echo trim($nimiKentta); echo "'>cl  $tulos->aines&nbsp;&nbsp;&nbsp;";
             if($i%3==0) {
                 echo "<br>";
             }
             $i++;
-            $x++;
         }
     }
     
@@ -135,19 +161,14 @@
 
         if(trim($lisaaja) == trim($_SESSION['kirjautunut'])) {
             echo '<br><br>';
-            echo "<p><a href=";
-            echo '"http://askivilu.users.cs.helsinki.fi/muok.php?id=';
-            echo "$id";
-            echo  '">';
-            echo "Muokkaa";
-            echo "</a></p>";
-            echo "<p><a href=";
-            echo '"http://askivilu.users.cs.helsinki.fi/poista.php?id=';
-            echo "$id";
-            echo  '">';
-            echo "Poista";
-            echo "</a></p>";
-            echo "<br>";
+            echo '<form action="../muok.php" method="post">
+                    <p><input type="submit" value="Muokkaa reseptiä"></p>
+                    <input type="hidden" name="id" value="';echo $id;echo '">
+                  </form>';
+            echo '<form action="../poista.php" method="post">
+                    <p><input type="submit" value="Poista resepti"></p>
+                    <input type="hidden" name="id" value="';echo $id;echo '">
+                  </form>';
         }
         
     }
@@ -201,7 +222,7 @@
                           echo "$maara";
                           echo "cl -- $aines"; 
                     };
-                    echo '<p>'; tulostaAineet(); echo '<p>Määrä ja aines</p></p><br>
+                    echo '<p>'; tulostaAineetMuokattavaksi($id); echo '<p>Määrä ja aines</p></p><br>
                 </div>
                 <p>Ohjeet</p>
                     <textarea rows="3" cols="50" name="ohje">'; echo trim($rivi->ohje); echo '</textarea>

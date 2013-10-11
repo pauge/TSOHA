@@ -1,7 +1,7 @@
 <?php
   require_once 'libs/common.php';
 
-  $id = $_GET["id"];
+  $id = $_POST["id"];
   if(onkoKirjautunut()==true) {
     $sivu = "views/reseptimuokkaus.php";
     naytaResepti($sivu,$id);

@@ -6,11 +6,10 @@ INSERT INTO kayttaja VALUES(
 
 INSERT INTO resepti VALUES(
 	'Vodkapaukku',   	
-	'4cl Vodka',
 	'kaada ja nauti',
 	'ota kaksi kerrallaan',
 	'true',
-        'administrator'
+        'admini'
 );
 
 INSERT INTO aines VALUES(
@@ -18,7 +17,7 @@ INSERT INTO aines VALUES(
 );
 
 INSERT INTO ainesosa VALUES(
-	resepti        int             PRIMARY KEY,
-	maara          int,
-	aines          char(20)    REFERENCES aines(aines)
+	33,
+	20,
+	'appelsiinimehu'
 );

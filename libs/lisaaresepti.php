@@ -19,9 +19,9 @@
     $lisahuomio = $_POST["lisaohje"];
     $lisaaja = $_SESSION['kirjautunut'];
     
-    $lause = "select * from resepti WHERE nimi = '$nimi'";
+    $lause = "select * from resepti WHERE UPPER(nimi) = UPPER(?)";
     $kysely = getYhteys()->prepare($lause);
-    $kysely->execute();
+    $kysely->execute(array($nimi));
     $num = $kysely->rowCount();
 
     if($num > 0) {
@@ -50,20 +50,20 @@
         $num = $kysely4->rowCount();         //kuinka monta ainesta taytyy kayda lapi?
         $i =1;                              //lomakkeen aines-kentat numeroitu 1->
         
-        while($i<=$num) {
-            $rivi = $kysely4->fetch(PDO::FETCH_OBJ);
-            if(empty($_POST["$i"])){
-                $i++;
+        while($tulos4=$kysely4->fetch(PDO::FETCH_OBJ)){
+            $ainesNimi = trim($tulos4->aines);
+            
+            if(empty($_POST["$ainesNimi"])){
             }
             else {
-                $maara = $_POST["$i"];          //paljon laitetaan
-                $aines = $rivi->aines;          //mita laitetaan
+                $maara = $_POST["$ainesNimi"];
+                $aines = $ainesNimi;
                 $lause5 = "INSERT INTO ainesosa VALUES (?,?,?);";
                 $kysely5 = getYhteys()->prepare($lause5);
                 $kysely5->execute(array($id,$maara,$aines));
-                $i++; 
             }
         }
+        
         $sivu = '../views/reseptiehdotus.php';
         $err = "Resepti '$nimi' lisätty.";
         naytaNakymaVirhe($sivu, $err);

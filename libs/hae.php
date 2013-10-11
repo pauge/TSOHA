@@ -8,7 +8,7 @@
     if($_POST["haku"] == "aines") {
         $haku = $_POST["hakusana"];
         
-        $lause = "SELECT * FROM ainesosa WHERE aines = ?";
+        $lause = "SELECT * FROM ainesosa WHERE UPPER(aines) = UPPER(?)";
         $kysely = getYhteys()->prepare($lause);
         $kysely->execute(array($haku));
         $num =$kysely->rowCount();                          //montako reseptia sisaltaa aineen
@@ -26,7 +26,7 @@
     if($_POST["haku"] == "nimi") {
         $haku = $_POST["hakusana"];
         
-        $lause = "SELECT * FROM resepti WHERE nimi = ?";
+        $lause = "SELECT * FROM resepti WHERE UPPER(nimi) LIKE UPPER(?);";
         $kysely = getYhteys()->prepare($lause);
         $kysely->execute(array($haku));
         $num =$kysely->rowCount();                          //montako reseptia sisaltaa aineen

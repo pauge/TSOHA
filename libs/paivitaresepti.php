@@ -21,13 +21,7 @@
     $ohje = $_POST["ohje"];
     $lisahuomio = $_POST["lisaohje"];
     $lisaaja = $_SESSION['kirjautunut'];
-    
-    $lause = "select * from resepti WHERE nimi = '$nimi'";
-    $kysely = getYhteys()->prepare($lause);
-    $kysely->execute();
-
-
-    
+   
 
         /*Lisätään uusi resepti kantaan*/
 
@@ -35,29 +29,32 @@
         $kysely2 = getYhteys()->prepare($lause2);
         $kysely2->execute(array($nimi,$ohje,$lisahuomio,$id));
         
-        $lause3 = "delete from ainesosa where resepti = ?;"; // poistetaan vanhat ainesosat. niitä on hankala paivittaa...
+        $lause3 = "delete from ainesosa where resepti = ?;"; // poistetaan vanhat ainesosat
         $kysely3 = getYhteys()->prepare($lause3);
         $kysely3->execute(array($id));
         
         $lause4 = "select * from aines";
         $kysely4 = getYhteys()->prepare($lause4);
         $kysely4->execute();
-        $num = $kysely4->rowCount();         //kuinka monta ainesta taytyy kayda lapi?
-        $i =1;
         
-        while($i<=$num) {
-            $rivi = $kysely4->fetch(PDO::FETCH_OBJ);
-            if(empty($_POST["$i"])){
-                $i++;
+        $lause5 = "select * from ainesosa where resepti = ?;";  //haetaan ainesosat jotka kuuluvat tälle reseptille
+        $kysely5 = getYhteys()->prepare($lause5);
+        $kysely5->execute(array($id));
+        $tulos5 = $kysely5->fetch(PDO::FETCH_OBJ);
+        $ainesVanha = trim($tulos5->aines);                 //otetaan ylös aineen nimi, joka on välitaulussa ensimmäisenä reseptin id:llä. 
+                                                            //tauluissa rivit ovat nimen suhteen samassa järjestyksessä
+        while($tulos4=$kysely4->fetch(PDO::FETCH_OBJ)){
+            $ainesNimi = trim($tulos4->aines);
+            
+            if(empty($_POST["$ainesNimi"])){
             }
             else {
-                $maara = $_POST["$i"];          //paljon laitetaan
-                $aines = $rivi->aines;          //mita laitetaan
+                $maara = $_POST["$ainesNimi"];
+                $aines = $ainesNimi;
                 $lause5 = "INSERT INTO ainesosa VALUES (?,?,?);";
                 $kysely5 = getYhteys()->prepare($lause5);
                 $kysely5->execute(array($id,$maara,$aines));
-                $i++; 
-            }
+         }
         }
 
         $sivu = '../views/arkisto.php';

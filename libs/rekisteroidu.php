@@ -35,13 +35,21 @@
         naytaNakymaVirhe($sivu, $err);
   	die();
   }
+  
+  if(isset($_SESSION['kirjautunut'])) {
+      $sivu = '../views/kirjautuminen.php';
+      $err = "Kirjaa edellinen ulos ensin.";
+      naytaNakymaVirhe($sivu, $err);
+      die();
+  }
+  
   $tunnus = trim($_POST["ID"]);
   $pwd = $_POST["passwd"];
   
-  $lause = "select * from kayttaja WHERE ktunnus = '$tunnus'";
+  $lause = "select * from kayttaja WHERE UPPER(ktunnus) = UPPER(?)";
   
   $kysely = getYhteys()->prepare($lause);
-  $kysely->execute();
+  $kysely->execute(array($tunnus));
   $num = $kysely->rowCount();
 
   if($num > 0) {

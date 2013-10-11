@@ -10,10 +10,10 @@
     }
     
     $aine = $_POST["uusi"];
-    $lause = "select * from aines WHERE aines = '$aine'";
+    $lause = "select * from aines WHERE UPPER(aines) = UPPER(?);";
     
     $kysely = getYhteys()->prepare($lause);
-    $kysely->execute();
+    $kysely->execute(array($aine));
     $num = $kysely->rowCount();
     
     if($num==0) {
