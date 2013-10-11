@@ -156,6 +156,12 @@
         die();
     }
     
+    function naytaReseptiVirhe($sivu,$id, $err) {
+        $viesti['virhe'] = $err;
+        require '../views/pohja.php';
+        die();
+    }
+    
     function poistaResepti($id) {
         $lause = "delete from ainesosa where resepti = ?;";
         $kysely = getYhteys()->prepare($lause);
@@ -164,4 +170,44 @@
         $lause2 = "delete from resepti where id = ?;";
         $kysely = getYhteys()->prepare($lause2);
         $kysely->execute(array($id));
+    }
+    
+    function muokkaaReseptia($id) {
+
+                
+        $lause = "SELECT * FROM resepti WHERE id = ?;";
+        $kysely = getYhteys()->prepare($lause);
+        $kysely->execute(array($id));
+        $rivi = $kysely->fetch(PDO::FETCH_OBJ);
+
+        $lause2 = "SELECT * FROM ainesosa WHERE resepti = ?;";
+        $kysely2 = getYhteys()->prepare($lause2);
+        $kysely2->execute(array($id));
+        
+        echo '<p>Jos et löydä tarvittavaa aineosaa listalta, lisää se tässä:</p>
+            <form action="../libs/lisaaAineMuok.php" method="post">
+                <p><input type="text" name="uusi" maxlength="20"><input type="submit"></p>
+                <input type="hidden" name="id" value="'; echo $id; echo '">
+            </form>
+            <br>
+            <form action="../libs/paivitaresepti.php" method="post">
+                <div>
+                    <p>Reseptin nimi:</p>
+                    <p><input type="text" name="nimi" maxlength="30" size="30" value="'; echo trim($rivi->nimi); echo '"></p><br><p> Aineet tällä hetkellä';
+                    while($tulos2 = $kysely2->fetch(PDO::FETCH_OBJ)){
+                          $maara = $tulos2->maara;
+                          $aines = $tulos2->aines;
+                          echo "<br>";
+                          echo "$maara";
+                          echo "cl -- $aines"; 
+                    };
+                    echo '<p>'; tulostaAineet(); echo '<p>Määrä ja aines</p></p><br>
+                </div>
+                <p>Ohjeet</p>
+                    <textarea rows="3" cols="50" name="ohje">'; echo trim($rivi->ohje); echo '</textarea>
+                <p>Lisähuomautukset</p>
+                    <textarea rows="3" cols="50" name="lisaohje">'; echo trim($rivi->lisahuomio); echo '</textarea>
+                <p><input type="submit"></p>
+                <input type="hidden" name="id" value="'; echo $id; echo '">
+            </form>';
     }

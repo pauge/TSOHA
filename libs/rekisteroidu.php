@@ -35,7 +35,7 @@
         naytaNakymaVirhe($sivu, $err);
   	die();
   }
-  $tunnus = $_POST["ID"];
+  $tunnus = trim($_POST["ID"]);
   $pwd = $_POST["passwd"];
   
   $lause = "select * from kayttaja WHERE ktunnus = '$tunnus'";
