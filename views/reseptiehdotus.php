@@ -8,7 +8,7 @@
             <form action="../libs/lisaaresepti.php" method="post">
                 <div>
                     <p>Reseptin nimi:</p>
-                    <p><input type="text" name="nimi" maxlength="30" size="30"></p><br>
+                    <p><input type="text" name="nimi" maxlength="20" size="20"></p><br>
                     <p>Määrä ja aines</p>
                     <p><?php tulostaAineet()?></p><br>
                 </div>

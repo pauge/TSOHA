@@ -159,7 +159,7 @@
     }
     
 
-        if(trim($lisaaja) == trim($_SESSION['kirjautunut'])) {
+        if(trim($lisaaja) == trim($_SESSION['kirjautunut']) || trim($_SESSION['kirjautunut']) == "admin") {
             echo '<br><br>';
             echo '<form action="../muok.php" method="post">
                     <p><input type="submit" value="Muokkaa reseptiä"></p>
@@ -214,7 +214,7 @@
             <form action="../libs/paivitaresepti.php" method="post">
                 <div>
                     <p>Reseptin nimi:</p>
-                    <p><input type="text" name="nimi" maxlength="30" size="30" value="'; echo trim($rivi->nimi); echo '"></p><br><p> Aineet tällä hetkellä';
+                    <p><input type="text" name="nimi" maxlength="20" size="20" value="'; echo trim($rivi->nimi); echo '"></p><br><p> Aineet tällä hetkellä';
                     while($tulos2 = $kysely2->fetch(PDO::FETCH_OBJ)){
                           $maara = $tulos2->maara;
                           $aines = $tulos2->aines;

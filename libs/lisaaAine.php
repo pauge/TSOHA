@@ -6,7 +6,7 @@
       naytaNakymaVirhe($sivu, $err);
     }
     
-    $aine = $_POST["uusi"];
+    $aine = trim($_POST["uusi"]);
     $lause = "select * from aines WHERE UPPER(aines) = UPPER(?);";
     
     $kysely = getYhteys()->prepare($lause);
